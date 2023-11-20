@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgresqlSocketsServer
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: bdados12
+      PGDATA: /data/postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pgdata:/data/postgres
+
+  rabbitmq:
+    container_name: rabbitmq-server
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  pgdata:
+    driver: local
