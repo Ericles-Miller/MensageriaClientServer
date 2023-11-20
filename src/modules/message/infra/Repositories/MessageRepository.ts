@@ -20,7 +20,8 @@ export class MessageRepository implements IMessageRepository {
     });
   }
 
-  list(): Promise<Message[]> {
-    throw new Error("Method not implemented.");
+  async list(): Promise<Message[]> {
+    const messages = await this.repository.findMany();
+    return messages;
   }
 }

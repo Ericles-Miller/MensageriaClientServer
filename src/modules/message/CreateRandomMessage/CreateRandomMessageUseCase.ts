@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable import/no-extraneous-dependencies */
 import { faker } from '@faker-js/faker';
 import { inject, injectable } from "tsyringe";
 
