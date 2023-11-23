@@ -1,5 +1,5 @@
-import { CreateRandomMessageController } from "@modules/message/CreateRandomMessage/CreateRandomMessageController";
-import { ListMessageController } from "@modules/message/listMessages/ListMessagesController";
+import { CreateRandomMessageController } from "@modules/message/useCase/listMessages/CreateRandomMessage/CreateRandomMessageController";
+import { ListMessageController } from "@modules/message/useCase/listMessages/ListMessagesController";
 import { Router } from "express";
 
 export const messageRouter = Router();

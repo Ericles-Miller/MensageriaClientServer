@@ -1,16 +1,18 @@
 import amqp from "amqplib";
+import { IMessageProducerService } from "jobs/IMessageProducerService";
 import { MessageProducerService } from "jobs/MessageProducerService";
 import { inject, injectable } from "tsyringe";
 
-import { IMessageRepository } from "../infra/Repositories/IMessageRepository";
-import { MessageRepository } from "../infra/Repositories/MessageRepository";
+import { IMessageRepository } from "../../infra/Repositories/IMessageRepository";
+import { MessageRepository } from "../../infra/Repositories/MessageRepository";
 
-injectable();
+@injectable()
 export class ListMessagesUseCase {
   constructor(
     @inject(MessageRepository)
     private messageRepository: IMessageRepository,
-    private messageProducerService: MessageProducerService,
+    @inject(MessageProducerService)
+    private messageProducerService: IMessageProducerService,
   ) {}
 
   async execute(): Promise<void> {
@@ -19,10 +21,8 @@ export class ListMessagesUseCase {
     const rabbitMQUrl = "amqp://localhost";
     const queue = "message-queue";
 
-    // Criar uma única conexão para todas as mensagens
     const connection = await amqp.connect(rabbitMQUrl);
 
-    // Enviar cada mensagem usando a conexão
     await Promise.all(
       messages.map(async (message) => {
         await this.messageProducerService.sendMessage(
@@ -33,7 +33,6 @@ export class ListMessagesUseCase {
       }),
     );
 
-    // Fechar a conexão após enviar todas as mensagens
     await connection.close();
   }
 }

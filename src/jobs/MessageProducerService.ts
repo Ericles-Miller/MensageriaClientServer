@@ -2,15 +2,16 @@ import { Message } from "@prisma/client";
 import amqp from "amqplib";
 import { injectable } from "tsyringe";
 
-@injectable()
-export class MessageProducerService {
-  constructor() {}
+import { IMessageProducerService } from "./IMessageProducerService";
 
+@injectable()
+export class MessageProducerService implements IMessageProducerService {
+  constructor() {}
   async sendMessage(
     connection: amqp.Connection,
     queue: string,
     message: Message,
-  ) {
+  ): Promise<amqp.Channel> {
     const canal = await connection.createChannel();
 
     await canal.assertQueue(queue, { durable: false });

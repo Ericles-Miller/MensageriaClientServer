@@ -3,8 +3,8 @@
 import { faker } from '@faker-js/faker';
 import { inject, injectable } from "tsyringe";
 
-import { IMessageRepository } from "../infra/Repositories/IMessageRepository";
-import { MessageRepository } from "../infra/Repositories/MessageRepository";
+import { IMessageRepository } from "../../../infra/Repositories/IMessageRepository";
+import { MessageRepository } from "../../../infra/Repositories/MessageRepository";
 
 @injectable()
 export class CreateRandomMessageUseCase {
