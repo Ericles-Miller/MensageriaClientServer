@@ -16,7 +16,7 @@ export class CreateRandomMessageUseCase {
   async execute(): Promise<void> {
     const promises: Promise<void>[] = [];
 
-    for (let i = 0; i < 100; i += 1) {
+    for (let i = 0; i < 10000; i += 1) {
       const email = faker.internet.email();
       const username = faker.internet.userName();
       const description = faker.lorem.sentence();
